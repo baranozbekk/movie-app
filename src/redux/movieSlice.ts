@@ -6,7 +6,6 @@ import axios from 'axios';
 //i leave it here just to avoid sending seperate env files via email
 const API_KEY = '53efa3f0';
 const BASE_URL = 'http://www.omdbapi.com/';
-const POSTER_URL = 'http://img.omdbapi.com/';
 
 interface MovieState {
   movies: any[];

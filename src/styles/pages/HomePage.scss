@@ -29,7 +29,7 @@
       .spinner {
         position: absolute;
         right: 8px;
-        top: 48%;
+        top: 50%;
         width: 12px;
         height: 12px;
         border: 2px solid #ccc;
@@ -41,9 +41,21 @@
     }
 
     select {
+      appearance: none; /* Hides the default arrow in most browsers */
+      -moz-appearance: none; /* For Firefox */
+      -webkit-appearance: none; /* For WebKit browsers */
+      position: relative;
       padding: 6px;
+      padding-right: 40px; /* Space for the custom arrow */
       border: 1px solid #ccc;
       border-radius: 4px;
+      background-color: #fff;
+      background-image: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #f9f9f9; /* Optional hover effect */
+      }
     }
   }
 

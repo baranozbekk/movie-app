@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(setQuery(debouncedQuery));
-      // setLoadingQuery(false);
+      setLoadingQuery(false);
     }, 2000);
 
     setLoadingQuery(true);
@@ -53,7 +53,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="home-page">
-      <h1>Movie Browser</h1>
+      <h1>OMDB Browser</h1>
       <div className="filters">
         <div className="input-with-spinner">
           <input
