@@ -22,7 +22,7 @@ interface MovieState {
 const initialState: MovieState = {
   movies: [],
   selectedMovie: null,
-  query: 'Pokemon', // Default search query
+  query: 'Pokemon',
   year: '',
   type: '',
   page: 1,
@@ -41,7 +41,6 @@ export const fetchMovies = createAsyncThunk('movies/fetchMovies', async (_, { ge
   const url = `${BASE_URL}?apikey=${API_KEY}&s=${query}&page=${page}${year && `&y=${year}`}${
     type && `&type=${type}`
   }`;
-  // const url = `${BASE_URL}?apikey=${API_KEY}&s=${query}`;
 
   const response = await axios.get(url);
   if (response.data.Response === 'False') {

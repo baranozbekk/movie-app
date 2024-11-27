@@ -14,25 +14,37 @@ const HomePage: React.FC = () => {
   );
 
   const [debouncedQuery, setDebouncedQuery] = useState(query);
+  const [debouncedYear, setDebouncedYear] = useState(year);
+  const [loadingQuery, setLoadingQuery] = useState(false);
+  const [loadingYear, setLoadingYear] = useState(false);
 
-  // Handle Debounced Search
+  // Debounced Search
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(setQuery(debouncedQuery));
+      // setLoadingQuery(false);
     }, 2000);
 
+    setLoadingQuery(true);
     return () => clearTimeout(timer);
   }, [debouncedQuery, dispatch]);
 
-  // Fetch movies on initial load and when filters change
+  // Debounced Year Filter
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(setYear(debouncedYear));
+      dispatch(setPage(1)); // Reset to the first page
+      setLoadingYear(false);
+    }, 2000);
+
+    setLoadingYear(true);
+    return () => clearTimeout(timer);
+  }, [debouncedYear, dispatch]);
+
+  // Fetch movies when filters change
   useEffect(() => {
     dispatch(fetchMovies());
   }, [dispatch, query, year, type, page]);
-
-  const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setYear(e.target.value));
-    dispatch(setPage(1)); // Reset to the first page
-  };
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setType(e.target.value));
@@ -43,18 +55,24 @@ const HomePage: React.FC = () => {
     <div className="home-page">
       <h1>Movie Browser</h1>
       <div className="filters">
-        <input
-          type="text"
-          placeholder="Search by name..."
-          value={debouncedQuery}
-          onChange={e => setDebouncedQuery(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Filter by year"
-          value={year}
-          onChange={handleYearChange}
-        />
+        <div className="input-with-spinner">
+          <input
+            type="text"
+            placeholder="Search by name..."
+            value={debouncedQuery}
+            onChange={e => setDebouncedQuery(e.target.value)}
+          />
+          {loadingQuery && <div className="spinner" />}
+        </div>
+        <div className="input-with-spinner">
+          <input
+            type="number"
+            placeholder="Filter by year"
+            value={debouncedYear}
+            onChange={e => setDebouncedYear(e.target.value)}
+          />
+          {loadingYear && <div className="spinner" />}
+        </div>
         <select value={type} onChange={handleTypeChange}>
           <option value="">All Types</option>
           <option value="movie">Movies</option>
