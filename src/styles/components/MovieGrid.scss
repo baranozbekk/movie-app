@@ -1,0 +1,21 @@
+.movie-grid {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f4f4f4;
+  }
+
+  .movie-grid__empty {
+    text-align: center;
+    padding: 20px;
+  }
+}
